@@ -652,7 +652,7 @@
   }
 
   .u-bg-deep {
-    background: #0f3c3c;
+    background: white;
   }
   .u-bg-deep {
     position: absolute;
@@ -705,7 +705,7 @@
   }
 
   .service-body {
-    background: #0f3c3c;
+    background: white;
     color: #fafafa;
   }
 
