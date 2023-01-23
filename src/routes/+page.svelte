@@ -3,7 +3,7 @@
   import Mission from "./Mission.svelte";
   import Navbar from "./Navbar.svelte";
   import Service from "./Service.svelte";
-  import SignUp from "./Signup.svelte";
+  import Signup from "./Signup.svelte";
 </script>
 
 <Navbar />
