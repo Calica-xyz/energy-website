@@ -3,9 +3,13 @@
 
   var illo;
   var head;
+  var rotationSpeed = 0.001;
 
   let bottomShapes = [];
+  let allShapes = [];
+  let shapeColors = [];
   let bottomRemoved = false;
+  let convertedToClouds = false;
 
   // boolean flag for spin
   let isSpinning = true;
@@ -26,16 +30,14 @@
 
       // console.log(zoomScale);
 
-      if (zoomScale > 1.2) {
-        for (let bottomShape of bottomShapes) {
-          bottomShape.remove();
-        }
-        bottomRemoved = true;
-      } else if (bottomRemoved) {
-        for (let bottomShape of bottomShapes) {
-          head.addChild(bottomShape);
-        }
-        bottomRemoved = false;
+      if (zoomScale <= 1.2) {
+        if (bottomRemoved) toggleBottomShapes();
+        if (convertedToClouds) toggleClouds();
+      } else if (zoomScale < 2.7) {
+        if (!bottomRemoved) toggleBottomShapes();
+        if (convertedToClouds) toggleClouds();
+      } else {
+        if (!convertedToClouds) toggleClouds();
       }
 
       illo.zoom = initZoom * zoomScale;
@@ -48,8 +50,34 @@
       // console.log(illo);
     };
 
-    window.$(window).resize(resizeNav);
+    function toggleBottomShapes() {
+      if (bottomRemoved) {
+        for (let bottomShape of bottomShapes) {
+          head.addChild(bottomShape);
+        }
+      } else {
+        for (let bottomShape of bottomShapes) {
+          bottomShape.remove();
+        }
+      }
+      bottomRemoved = !bottomRemoved;
+    }
 
+    function toggleClouds() {
+      if (convertedToClouds) {
+        for (let i = 0; i < allShapes.length; i++) {
+          allShapes[i].color = shapeColors[i];
+        }
+      } else {
+        for (let shape of allShapes) {
+          shape.color = "rgba(255, 255, 255, 0.1)";
+        }
+      }
+
+      convertedToClouds = !convertedToClouds;
+    }
+
+    window.$(window).resize(resizeNav);
     function resizeNav() {
       drawEarth();
     }
@@ -64,7 +92,7 @@
       );
       initZoom = Math.floor((minWindowSize / illoSize) * 1);
       illoElem.setAttribute("width", window.innerWidth);
-      illoElem.setAttribute("height", window.innerHeight * 2 - 40);
+      illoElem.setAttribute("height", window.innerHeight * 2);
 
       // Zdog math variables
       const TAU = Zdog.TAU;
@@ -74,9 +102,6 @@
         element: illoElem,
         zoom: initZoom,
         dragRotate: true,
-        onDragStart: function () {
-          isSpinning = false;
-        },
         rotate: { y: TAU / 4 },
         translate: { x: 10, y: -30 },
       });
@@ -111,10 +136,12 @@
         stroke: 7,
         addTo: head,
       });
-      land1.copy({
+      let land1Copy = land1.copy({
         scale: { x: -1 },
         translate: { x: -17, y: 0, z: 4 },
       });
+      allShapes.push(land1);
+      allShapes.push(land1Copy);
 
       const land2 = new Zdog.Shape({
         path: [
@@ -128,8 +155,9 @@
         stroke: 7,
         addTo: head,
       });
+      allShapes.push(land2);
 
-      new Zdog.Shape({
+      const land8 = new Zdog.Shape({
         path: [
           { x: 0, y: 0, z: 0 },
           { x: 5, y: 0, z: 4 },
@@ -141,6 +169,7 @@
         stroke: 7,
         addTo: head,
       });
+      allShapes.push(land8);
 
       const land3 = new Zdog.Shape({
         path: [
@@ -160,6 +189,8 @@
       });
       bottomShapes.push(land3);
       bottomShapes.push(bottomLand3);
+      allShapes.push(land3);
+      allShapes.push(bottomLand3);
 
       const land4 = new Zdog.Shape({
         path: [
@@ -173,10 +204,12 @@
         stroke: 4,
         addTo: head,
       });
-      land4.copy({
+      const land4Copy = land4.copy({
         scale: { x: -1 },
         translate: { x: -10, y: 3, z: 16 },
       });
+      allShapes.push(land4);
+      allShapes.push(land4Copy);
 
       // light clouds
       const cloud1 = new Zdog.Shape({
@@ -191,8 +224,9 @@
         stroke: 5,
         addTo: head,
       });
+      allShapes.push(cloud1);
 
-      new Zdog.Shape({
+      const cloud8 = new Zdog.Shape({
         path: [
           { x: 0, y: 0, z: 0 },
           { x: 3, y: 0, z: 1 },
@@ -204,6 +238,7 @@
         stroke: 5,
         addTo: head,
       });
+      allShapes.push(cloud8);
 
       const cloud2 = new Zdog.Shape({
         path: [
@@ -217,10 +252,12 @@
         stroke: 4,
         addTo: head,
       });
-      cloud2.copy({
+      const cloud2Copy = cloud2.copy({
         scale: { x: -1 },
         translate: { x: -23, y: 2, z: 4 },
       });
+      allShapes.push(cloud2);
+      allShapes.push(cloud2Copy);
 
       const cloud3 = new Zdog.Shape({
         path: [
@@ -234,10 +271,12 @@
         stroke: 2,
         addTo: head,
       });
-      cloud3.copy({
+      const cloud3Copy = cloud3.copy({
         scale: { x: -1 },
         translate: { x: -20, y: -2, z: 7 },
       });
+      allShapes.push(cloud3);
+      allShapes.push(cloud3Copy);
 
       const cloud4 = new Zdog.Shape({
         path: [
@@ -251,10 +290,12 @@
         stroke: 3,
         addTo: head,
       });
-      cloud4.copy({
+      const cloud4Copy = cloud4.copy({
         scale: { x: -1 },
         translate: { x: -18, y: -10, z: 7 },
       });
+      allShapes.push(cloud4);
+      allShapes.push(cloud4Copy);
 
       // dark clouds
       const cloud5 = new Zdog.Shape({
@@ -269,10 +310,12 @@
         stroke: 3,
         addTo: head,
       });
-      cloud5.copy({
+      const cloud5Copy = cloud5.copy({
         scale: { x: -1 },
         translate: { x: -20, y: -8, z: -3 },
       });
+      allShapes.push(cloud5);
+      allShapes.push(cloud5Copy);
 
       const cloud6 = new Zdog.Shape({
         path: [
@@ -286,10 +329,12 @@
         stroke: 6,
         addTo: head,
       });
-      cloud6.copy({
+      const cloud6Copy = cloud6.copy({
         scale: { x: -1 },
         translate: { x: -20, y: 0, z: -8 },
       });
+      allShapes.push(cloud6);
+      allShapes.push(cloud6Copy);
 
       const cloud7 = new Zdog.Shape({
         path: [
@@ -304,14 +349,16 @@
         addTo: head,
       });
       bottomShapes.push(cloud7);
+      allShapes.push(cloud7);
 
       let bottomCloud7 = cloud7.copy({
         scale: { x: -1 },
         translate: { x: -15, y: 15, z: -8 },
       });
       bottomShapes.push(bottomCloud7);
+      allShapes.push(bottomCloud7);
 
-      new Zdog.Shape({
+      const cloud9 = new Zdog.Shape({
         path: [
           { x: 0, y: 0, z: 0 },
           { x: -5, y: 0, z: 0 },
@@ -322,6 +369,7 @@
         stroke: 8,
         addTo: head,
       });
+      allShapes.push(cloud9);
 
       // dark green lands
       const land5 = new Zdog.Shape({
@@ -335,12 +383,14 @@
         stroke: 4,
         addTo: head,
       });
+      allShapes.push(land5);
 
       let bottomLand5 = land5.copy({
         scale: { x: -1 },
         translate: { x: -7, y: 12, z: -16 },
       });
       bottomShapes.push(bottomLand5);
+      allShapes.push(bottomLand5);
 
       const land6 = new Zdog.Shape({
         path: [
@@ -353,6 +403,7 @@
         stroke: 8,
         addTo: head,
       });
+      allShapes.push(land6);
 
       const land7 = new Zdog.Shape({
         path: [
@@ -365,25 +416,32 @@
         stroke: 4,
         addTo: head,
       });
-      land5.copy({
+      allShapes.push(land7);
+
+      const otherLand = land5.copy({
         scale: { x: -1 },
         translate: { x: -13, y: -10, z: -10 },
         stroke: 5,
       });
+      allShapes.push(otherLand);
+
+      for (let shape of allShapes) {
+        shapeColors.push(shape.color);
+      }
 
       animate();
     }
 
     // spinning animation
     function animate() {
-      illo.rotate.y += isSpinning ? -0.01 : 0;
+      illo.rotate.y += isSpinning ? rotationSpeed : 0;
       illo.updateRenderGraph();
       requestAnimationFrame(animate);
     }
   });
 </script>
 
-<section class="h-[100vh] mt-[-68px] w-full relative block bg-gray-800">
+<section class="h-[100vh] w-full relative block bg-gray-800">
   <canvas class="illo absolute z-0 m-auto right-0 left-0" />
 
   <div class="absolute bottom-[5vw] left-[6vw] text-white">
@@ -393,7 +451,4 @@
 </section>
 
 <style>
-  .illo {
-    cursor: move;
-  }
 </style>

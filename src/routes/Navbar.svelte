@@ -47,9 +47,11 @@
 </script>
 
 <nav
-  class="bg-gray-800 border-gray-200 px-6 sm:px-8 py-4 rounded relative z-10"
+  class="bg-gray-800 border-gray-200 px-6 top-6 w-full sm:px-8 py-4 rounded absolute"
 >
-  <div class="container flex flex-wrap items-center justify-between mx-auto">
+  <div
+    class="container flex flex-wrap items-center justify-between mx-auto z-10 relative"
+  >
     <a href="https://flowbite.com/" class="flex items-center">
       <img
         class="block h-8 w-auto lg:hidden"
@@ -90,7 +92,7 @@
 
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul
-        class="flex flex-col gap-x-8 p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-800"
+        class="flex flex-col gap-x-8 p-4 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0"
       >
         <li>
           <a

@@ -166,7 +166,7 @@
     });
 
     function animate() {
-      bladeGroup.rotate.z -= 0.05;
+      bladeGroup.rotate.z -= 0.02;
       //illo.rotate.y -= 0.01;
       illo.updateRenderGraph();
       requestAnimationFrame(animate);
@@ -175,7 +175,7 @@
   });
 </script>
 
-<section id="mission" class="flex flex-col bg-gray-800  text-white">
+<section id="mission" class="flex flex-col bg-gray-800  text-white h-[100vh] ">
   <div class="relative z-10 m-20">
     <h2 class="text-5xl">Our Mission</h2>
     <div class="mt-10 flex flex-wrap">
