@@ -14,12 +14,13 @@
 
       resizeNav();
 
-      window.setTimeout(function () {
-        window.$("#nav-toggle").click();
-      }, 1000);
+      //   window.setTimeout(function () {
+      //     window.$("#nav-toggle").click();
+      //   }, 1000);
     });
 
     function resizeNav() {
+      console.log(window.innerHeight, window.innerWidth);
       // Set the nav height to fill the window
       window.$("#nav-fullscreen").css({ height: window.innerHeight });
 
@@ -28,6 +29,7 @@
       var radius = Math.sqrt(
         Math.pow(window.innerHeight, 2) + Math.pow(window.innerWidth, 2)
       );
+
       var diameter = radius * 2;
       window.$("#nav-overlay").width(diameter);
       window.$("#nav-overlay").height(diameter);
@@ -46,6 +48,25 @@
   });
 </script>
 
+<div id="nav-container">
+  <div id="nav-overlay" />
+  <nav id="nav-fullscreen">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <a id="nav-toggle">
+    <span />
+    <span />
+    <span />
+  </a>
+</div>
+
+<!-- 
 <nav
   class="bg-gray-800 border-gray-200 px-6 top-6 w-full sm:px-8 py-4 rounded absolute"
 >
@@ -74,8 +95,8 @@
       aria-controls="navbar-default"
       aria-expanded="false"
     >
-      <div id="nav-overlay" class="open" />
-      <nav id="nav-fullscreen" class="open">
+      <div id="nav-overlay" />
+      <nav id="nav-fullscreen">
         <ul>
           <li><a href="#mission">Mission</a></li>
           <li><a href="#service">Service</a></li>
@@ -83,7 +104,7 @@
         </ul>
       </nav>
 
-      <a id="nav-toggle" class="open z-10">
+      <a id="nav-toggle" class="z-10">
         <span class="bg-black" />
         <span />
         <span />
@@ -118,15 +139,14 @@
       </ul>
     </div>
   </div>
-</nav>
-
+</nav> -->
 <style>
-  #nav-container {
+  :global(#nav-container) {
     margin-left: auto;
     position: relative;
   }
 
-  #nav-toggle {
+  :global(#nav-toggle) {
     display: block;
     width: 32px;
     height: 32px;
@@ -134,7 +154,7 @@
     transform: rotate(0deg);
   }
 
-  #nav-toggle span {
+  :global(#nav-toggle span) {
     background-color: black;
     width: 100%;
     height: 4px;
@@ -146,39 +166,39 @@
     transition: 0.5s ease-in-out;
   }
 
-  #nav-toggle span:nth-child(1) {
+  :global(#nav-toggle span:nth-child(1)) {
     top: 4px;
     transform-origin: left center;
   }
 
-  #nav-toggle span:nth-child(2) {
+  :global(#nav-toggle span:nth-child(2)) {
     top: 14px;
     transform-origin: left center;
   }
 
-  #nav-toggle span:nth-child(3) {
+  :global(#nav-toggle span:nth-child(3)) {
     top: 24px;
     transform-origin: left center;
   }
 
-  #nav-toggle.open span:nth-child(1) {
+  :global(#nav-toggle.open span:nth-child(1)) {
     transform: rotate(45deg);
     top: 3px;
     left: 4px;
   }
 
-  #nav-toggle.open span:nth-child(2) {
+  :global(#nav-toggle.open span:nth-child(2)) {
     width: 0%;
     opacity: 0;
   }
 
-  #nav-toggle.open span:nth-child(3) {
+  :global(#nav-toggle.open span:nth-child(3)) {
     transform: rotate(-45deg);
     top: 25px;
     left: 4px;
   }
 
-  #nav-overlay {
+  :global(#nav-overlay) {
     position: absolute;
     top: 16px;
     left: 16px;
@@ -189,11 +209,11 @@
     transform: scale3d(0, 0, 0);
   }
 
-  #nav-overlay.open {
+  :global(#nav-overlay.open) {
     transform: scale3d(1, 1, 1);
   }
 
-  #nav-fullscreen {
+  :global(#nav-fullscreen) {
     width: 100%;
     position: fixed;
     left: 0;
@@ -203,36 +223,30 @@
     visibility: hidden;
     opacity: 0;
   }
-  #nav-fullscreen ul {
+  :global(#nav-fullscreen ul) {
     list-style: none;
   }
-  #nav-fullscreen a {
+  :global(#nav-fullscreen a) {
     color: white;
     text-decoration: none;
   }
 
-  #nav-fullscreen.open {
+  :global(#nav-fullscreen.open) {
     visibility: visible;
     opacity: 1;
     transition: ease-in-out 0.5s;
     transition-delay: 0.25s;
   }
 
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-
-  #nav-overlay {
+  :global(#nav-overlay) {
     background: linear-gradient(180deg, #ff512f 10%, #ff512f 50%, #dd2476 90%);
   }
 
-  #nav-toggle span {
+  :global(#nav-toggle span) {
     background-color: black;
   }
 
-  #nav-fullscreen {
+  :global(#nav-fullscreen) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -240,7 +254,7 @@
     font-family: sans-serif;
     font-size: 10vh;
   }
-  #nav-fullscreen li:hover {
+  :global(#nav-fullscreen li:hover) {
     list-style: disc;
   }
 </style>

@@ -7,10 +7,10 @@
 </script>
 
 <Navbar />
-<Header />
+
+<!-- <Header />
 <Mission />
 <Service />
-<SignUp />
-
+<SignUp /> -->
 <style>
 </style>
