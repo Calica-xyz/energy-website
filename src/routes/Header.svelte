@@ -3,7 +3,8 @@
 
   var illo;
   var head;
-  var rotationSpeed = 0.001;
+  var starGroup;
+  var rotationSpeed = 0.007;
 
   let bottomShapes = [];
   let allShapes = [];
@@ -19,6 +20,8 @@
   onMount(() => {
     drawEarth();
 
+    animate();
+
     document.body.onscroll = function () {
       let t = document.body.getBoundingClientRect().top;
 
@@ -26,18 +29,21 @@
         return;
       }
 
-      let zoomScale = 1 + (Math.abs(t) / window.innerHeight) * 2.55;
+      let zoomScale = 1 + (Math.abs(t) / window.innerHeight) * 2.75;
 
       // console.log(zoomScale);
 
       if (zoomScale <= 1.2) {
         if (bottomRemoved) toggleBottomShapes();
         if (convertedToClouds) toggleClouds();
+        changeRotationSpeed(0.007);
       } else if (zoomScale < 2.7) {
         if (!bottomRemoved) toggleBottomShapes();
         if (convertedToClouds) toggleClouds();
+        changeRotationSpeed(0.007);
       } else {
         if (!convertedToClouds) toggleClouds();
+        changeRotationSpeed(0.001);
       }
 
       illo.zoom = initZoom * zoomScale;
@@ -92,6 +98,8 @@
       );
       initZoom = Math.floor((minWindowSize / illoSize) * 1);
       illoElem.setAttribute("width", window.innerWidth);
+
+      console.log(window.innerHeight * 2);
       illoElem.setAttribute("height", window.innerHeight * 2);
 
       // Zdog math variables
@@ -105,6 +113,32 @@
         rotate: { y: TAU / 4 },
         translate: { x: 10, y: -30 },
       });
+
+      starGroup = new Zdog.Group({
+        addTo: illo,
+      });
+
+      // The stars in the background
+      for (let i = 0; i < 100; i++) {
+        let x = Math.random() * 100 - 50;
+        let y = Math.random() * 100 - 50;
+        let z = Math.random() * 100 - 50;
+
+        while (Math.abs(x) < 10) x = Math.random() * 100 - 50;
+        while (Math.abs(y) < 10) y = Math.random() * 100 - 50;
+        while (Math.abs(z) < 10) z = Math.random() * 100 - 50;
+
+        new Zdog.Shape({
+          addTo: starGroup,
+          stroke: Math.random() * 0.4 + 0.1,
+          color: `hsla(0, 0%, 100%, ${Math.random() * 9.9 + 0.1})`,
+          translate: {
+            x,
+            y,
+            z,
+          },
+        });
+      }
 
       // frontside earth
       head = new Zdog.Hemisphere({
@@ -428,15 +462,18 @@
       for (let shape of allShapes) {
         shapeColors.push(shape.color);
       }
-
-      animate();
     }
 
     // spinning animation
     function animate() {
-      illo.rotate.y += isSpinning ? rotationSpeed : 0;
+      head.rotate.y += isSpinning ? rotationSpeed : 0;
+      starGroup.rotate.y -= 0.0004;
       illo.updateRenderGraph();
       requestAnimationFrame(animate);
+    }
+
+    function changeRotationSpeed(newRotationSpeed) {
+      rotationSpeed = newRotationSpeed;
     }
   });
 </script>

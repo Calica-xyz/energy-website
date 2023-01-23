@@ -2,7 +2,7 @@
 </script>
 
 <section class="home-service">
-  <div class="service-body">
+  <div class="service-body bg-gradient-to-b from-[#1976B5] to-white">
     <div class="c-sec__body">
       <div class="spr spr-w2" />
       <div class="c-inner">
@@ -705,7 +705,7 @@
   }
 
   .service-body {
-    background: white;
+    /* background: white; */
     color: #fafafa;
   }
 
