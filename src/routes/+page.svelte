@@ -11,6 +11,6 @@
 <!-- <Header />
 <Mission />
 <Service />
-<SignUp /> -->
+<Signup /> -->
 <style>
 </style>
