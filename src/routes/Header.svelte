@@ -109,7 +109,7 @@
       illo = new Zdog.Illustration({
         element: illoElem,
         zoom: initZoom,
-        dragRotate: true,
+        dragRotate: false,
         rotate: { y: TAU / 4 },
         translate: { x: 10, y: -30 },
       });
@@ -479,7 +479,7 @@
 </script>
 
 <section class="h-[100vh] w-full relative block bg-gray-800">
-  <canvas class="illo absolute z-0 m-auto right-0 left-0" />
+  <canvas class="illo absolute z-0 m-auto right-0 left-0 touch-auto" />
 
   <div class="absolute bottom-[5vw] left-[6vw] text-white">
     <h2 class="text-[6vw]">Own the</h2>
