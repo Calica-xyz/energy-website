@@ -80,12 +80,9 @@
 </nav>
 
 <style>
-  :global(.nav-links li a) {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
+  .nav-links {
+    visibility: hidden;
   }
-
   @media screen and (max-width: 768px) {
     :global(.line) {
       width: 30px;
@@ -128,6 +125,7 @@
     }
     :global(.nav-links li a) {
       font-size: 25px;
+      color: white;
     }
     :global(.nav-links li:nth-child(1)) {
       transition: all 0.5s ease 0.2s;
