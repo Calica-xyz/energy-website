@@ -82,10 +82,7 @@
     // setting up Zdog illustration element
     const illoElem = document.querySelector(".illo");
     const illoSize = 50;
-    const minWindowSize = Math.min(
-      window.innerWidth - 20,
-      window.innerHeight - 60
-    );
+    const minWindowSize = Math.min(innerWidth - 20, innerHeight - 60);
     initZoom = Math.floor((minWindowSize / illoSize) * 1);
     illoElem.setAttribute("width", innerWidth);
 
@@ -468,12 +465,7 @@
   });
 </script>
 
-<svelte:window
-  bind:scrollY
-  bind:innerHeight
-  bind:innerWidth
-  on:resize={drawEarth}
-/>
+<svelte:window bind:scrollY bind:innerHeight bind:innerWidth />
 
 <section class="h-[100vh] w-full relative block bg-gray-800">
   <canvas class="illo absolute z-0 m-auto right-0 left-0 touch-auto" />
