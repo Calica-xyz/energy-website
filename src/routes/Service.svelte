@@ -2,7 +2,9 @@
 </script>
 
 <section class="home-service">
-  <div class="p-20 service-body bg-gradient-to-b from-[#1976B5] to-white">
+  <div
+    class="p-0 sm:p-20 service-body bg-gradient-to-b from-[#1976B5] to-white"
+  >
     <div class="c-sec__body">
       <div class="c-inner">
         <div class="c-col c-col__reverse ">

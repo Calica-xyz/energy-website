@@ -111,7 +111,7 @@
     illo = new Zdog.Illustration({
       element: illoElem,
       zoom: initZoom,
-      dragRotate: true,
+      dragRotate: false,
       rotate: { y: TAU / 4 },
       translate: { x: initX, y: initY },
     });
