@@ -2,27 +2,22 @@
 </script>
 
 <section class="home-service">
-  <div class="service-body bg-gradient-to-b from-[#1976B5] to-white">
+  <div class="p-20 service-body bg-gradient-to-b from-[#1976B5] to-white">
     <div class="c-sec__body">
-      <div class="spr spr-w2" />
       <div class="c-inner">
-        <h3 class="c-sec__ttl u-green__line">
-          <span class="c-sec__ttl--text u-white__text u-in u-enter"
-            >Service</span
-          >
-        </h3>
-        <div class="spr spr-w3" />
         <div class="c-col c-col__reverse ">
           <div class="c-col__inner c-col__inner-left">
             <div class="spr spr-w4" />
             <p class="c-col__text fs-ll fw-m u-in u-enter">
-              生産の全てを可視化し、<br class="hide-m" /> 畜産を持続型産業へ
+              Introducing the ReWatt
             </p>
             <div class="spr spr-w4" />
             <p class="c-col__text fs-m u-in u-enter">
-              AI、ICT、IoTで養豚を改善するクラウド型養豚経営支援システムPorker、全自働型豚体重測定ABC、ハンディ計測・測定機器
-              iシリーズ。これらを豚舎内ネットワーク敷設サービスPorker
-              Connectが結ぶことで養豚生産にまつわる全てのデータ化、可視化によって生産管理と環境負荷軽減を実現します。
+              The first token that represents 1 KWh of renewable energy. Energy
+              Producers sell ReWatts for a set price to finance development.
+              Buyers receive the wholesale energy price of the ReWatt and
+              renewable energy credits that can be sold or burned to offset
+              their energy consumption.
             </p>
             <div class="spr spr-w4" />
             <div class="c-btn">
@@ -107,42 +102,46 @@
               </div>
               <div class="c-figure__item-wrap">
                 <div class="c-figure__item c-figure__ai">
-                  <span class="fs-xm u-deep__text">AI</span>
+                  <span class="fs-xm u-deep__text">Buyers</span>
                 </div>
                 <div class="c-figure__item c-figure__ict">
-                  <span class="fs-xm u-deep__text">ICT</span>
+                  <span class="fs-xm u-deep__text">Energy Grid</span>
                 </div>
                 <div class="c-figure__item c-figure__iot">
-                  <span class="fs-xm u-deep__text">Iot</span>
+                  <span class="fs-xm u-deep__text">Green Farms</span>
                 </div>
               </div>
               <div class="c-figure__label-wrap">
                 <div class="c-figure__label c-figure__label-01">
-                  <span class="c-figure__label-text fw-m fs-xs">豚データ</span>
+                  <span class="c-figure__label-text fw-m fs-xs"
+                    >Settle Price</span
+                  >
                 </div>
                 <div class="c-figure__label c-figure__label-02">
-                  <span class="c-figure__label-text fw-m fs-xs">最適化</span>
+                  <span class="c-figure__label-text fw-m fs-xs">Buy Tokens</span
+                  >
                 </div>
                 <div class="c-figure__label c-figure__label-03">
                   <span class="c-figure__label-text fw-m fs-xs"
-                    >センサーデータ</span
+                    >Sell Energy</span
                   >
                 </div>
               </div>
               <div class="c-figure__ttl-wrap">
                 <div class="c-figure__ttl-inner">
-                  <span class="c-figure__sub-ttl fs-xs fw-m"
+                  <!-- <span class="c-figure__sub-ttl fs-xs fw-m"
                     >養豚経営管理システム</span
-                  >
+                  > -->
                   <span class="c-figure__logo">
-                    <svg viewBox="0 0 215.948 50.141">
-                      <path
-                        d="M216,22.51c-7.184,0-12.2,4.2-12.2,13.643V49.731h-8.2V14.67h8.2v7.447c2.541-5.335,6.37-8.982,12.671-8.711v9.1ZM160.9,34.793c.878,5.835,5.013,9.093,10.3,9.093A12.325,12.325,0,0,0,180.9,39.61l4.812,4.276A17.784,17.784,0,0,1,171.67,50.57c-10.975,0-18.974-6.84-18.974-18.16v-.5c0-10.187,7.255-18.56,17.49-18.56,11.386,0,17.151,8.914,17.151,19.164,0,.738-.068,1.477-.137,2.282Zm9.216-14.483c-5.016,0-8.54,3.572-9.285,9.114H179.2C178.657,24.153,175.54,20.31,170.117,20.31ZM139.686,49.731l-10.57-15.467-4.776,5.267v10.2h-8.5V.429h8.5V29.873l14.532-15.2h9.962L134.6,28.589l14.705,21.142ZM94.25,36.153V49.731H86.51V14.67h7.74v7.447c2.235-5.335,6.37-8.982,12.671-8.711v9.1h-.474C99.263,22.51,94.25,26.709,94.25,36.153ZM59.413,50.57c-10.895,0-18.96-8.305-18.96-18.443v-.134a18.672,18.672,0,0,1,19.1-18.646c10.963,0,19.025,8.305,19.025,18.51v.136C78.575,42.129,70.445,50.57,59.413,50.57ZM70.377,31.993c0-6.286-4.535-11.49-10.964-11.49-6.565,0-10.759,5.136-10.759,11.354v.136c0,6.217,4.532,11.42,10.9,11.42,6.63,0,10.827-5.136,10.827-11.286ZM18.265,34.554H8.85V49.731H.522V2.469H19.215c11.1,0,18,6.285,18,15.826v.135C37.212,29.43,28.7,34.554,18.265,34.554ZM28.767,18.5c0-5.549-4-8.128-10.229-8.128H8.85V27.93h9.688c6.3,0,10.229-4.355,10.229-9.3Z"
-                        transform="translate(-0.522 -0.429)"
-                        fill="#fff"
-                        fill-rule="evenodd"
-                      />
-                    </svg>
+                    <img
+                      class="block h-8 w-auto"
+                      src="/logo.png"
+                      alt="Calica Logo"
+                    />
+                    <span
+                      class="self-center text-3xl ml-1 font-semibold whitespace-nowrap"
+                      >Calica</span
+                    >
                   </span>
                 </div>
               </div>
@@ -302,7 +301,6 @@
   .c-sec__body,
   .c-sec__ttl {
     margin: 0 auto;
-    width: 90vw;
   }
   .c-sec__ttl {
     border-bottom: 1px solid #d0d0d0;

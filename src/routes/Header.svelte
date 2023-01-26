@@ -4,7 +4,7 @@
   var illo;
   var head;
   var starGroup;
-  var rotationSpeed = 0.007;
+  var rotationSpeed = 0.004;
 
   let bottomShapes = [];
   let allShapes = [];
@@ -16,35 +16,46 @@
   let isSpinning = true;
 
   let initZoom;
+  let initX;
+  let initY;
 
   let scrollY;
   let innerHeight;
   let innerWidth;
 
-  $: if (innerHeight && scrollY <= innerHeight) {
+  $: if (innerHeight && scrollY) {
+    scrollEarth();
+  }
+
+  function scrollEarth() {
+    if (scrollY > innerHeight) scrollY = innerHeight;
+
     let zoomScale = 1 + (scrollY / innerHeight) * 2.75;
 
-    // console.log(zoomScale);
+    // console.log(scrollY, innerHeight, zoomScale);
 
     if (zoomScale <= 1.2) {
       if (bottomRemoved) toggleBottomShapes();
       if (convertedToClouds) toggleClouds();
-      changeRotationSpeed(0.007);
+      changeRotationSpeed(0.004);
     } else if (zoomScale < 2.7) {
       if (!bottomRemoved) toggleBottomShapes();
       if (convertedToClouds) toggleClouds();
-      changeRotationSpeed(0.007);
+      changeRotationSpeed(0.004);
     } else {
+      if (!bottomRemoved) toggleBottomShapes();
       if (!convertedToClouds) toggleClouds();
       changeRotationSpeed(0.001);
     }
 
     illo.zoom = initZoom * zoomScale;
 
-    let xScale = (scrollY / innerHeight) * 10;
-    let yScale = (scrollY / innerHeight) * 34;
+    let xScale = (scrollY / innerHeight) * initX;
+    let yScale = (scrollY / innerHeight) * Math.abs(initY);
 
-    illo.translate = { x: 10 - xScale, y: -30 + yScale };
+    illo.translate = { x: initX - xScale, y: initY + yScale };
+
+    window.$("#header-text").css("opacity", 1 - scrollY / innerHeight);
   }
 
   function toggleBottomShapes() {
@@ -82,8 +93,10 @@
     // setting up Zdog illustration element
     const illoElem = document.querySelector(".illo");
     const illoSize = 50;
-    const minWindowSize = Math.min(innerWidth - 20, innerHeight - 60);
-    initZoom = Math.floor((minWindowSize / illoSize) * 1);
+
+    initZoom = Math.floor((innerHeight / illoSize) * 1);
+    if (innerWidth <= 768) initZoom *= 0.85;
+
     illoElem.setAttribute("width", innerWidth);
 
     illoElem.setAttribute("height", innerHeight * 2);
@@ -91,13 +104,16 @@
     // Zdog math variables
     const TAU = Zdog.TAU;
 
+    initX = innerWidth <= 768 ? 0 : 10;
+    initY = innerWidth <= 768 ? -illoSize / 2 - 5 : -illoSize / 2;
+
     // illustration base
     illo = new Zdog.Illustration({
       element: illoElem,
       zoom: initZoom,
-      dragRotate: false,
+      dragRotate: true,
       rotate: { y: TAU / 4 },
-      translate: { x: 10, y: -30 },
+      translate: { x: initX, y: initY },
     });
 
     starGroup = new Zdog.Group({
@@ -105,18 +121,14 @@
     });
 
     // The stars in the background
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 300; i++) {
       let x = Math.random() * 100 - 50;
       let y = Math.random() * 100 - 50;
       let z = Math.random() * 100 - 50;
 
-      while (Math.abs(x) < 10) x = Math.random() * 100 - 50;
-      while (Math.abs(y) < 10) y = Math.random() * 100 - 50;
-      while (Math.abs(z) < 10) z = Math.random() * 100 - 50;
-
       new Zdog.Shape({
         addTo: starGroup,
-        stroke: Math.random() * 0.4 + 0.1,
+        stroke: Math.random() * 0.3 + 0.1,
         color: `hsla(0, 0%, 100%, ${Math.random() * 9.9 + 0.1})`,
         translate: {
           x,
@@ -124,23 +136,24 @@
           z,
         },
       });
+
+      // Counter balance group z-index
+      new Zdog.Shape({
+        addTo: starGroup,
+        visible: false,
+        translate: {
+          x: -x,
+          y: -y,
+          z: -z,
+        },
+      });
     }
 
     // frontside earth
-    head = new Zdog.Hemisphere({
+    head = new Zdog.Shape({
       addTo: illo,
-      diameter: 40,
-      stroke: false,
+      stroke: 40,
       color: "#1976B5",
-    });
-
-    // backside earth
-    new Zdog.Hemisphere({
-      addTo: head,
-      diameter: 40,
-      stroke: false,
-      color: "#1976B5",
-      rotate: { x: TAU / 2 },
     });
 
     // light green lands
@@ -453,7 +466,7 @@
   // spinning animation
   function animate() {
     head.rotate.y += isSpinning ? rotationSpeed : 0;
-    starGroup.rotate.y -= 0.0004;
+    starGroup.rotate.y -= 0.0001;
     illo.updateRenderGraph();
     requestAnimationFrame(animate);
   }
@@ -462,6 +475,8 @@
     drawEarth();
 
     animate();
+
+    scrollEarth();
   });
 </script>
 
@@ -470,9 +485,12 @@
 <section class="h-[100vh] w-full relative block bg-gray-800">
   <canvas class="illo absolute z-0 m-auto right-0 left-0 touch-auto" />
 
-  <div class="absolute bottom-[5vw] left-[6vw] text-white">
-    <h2 class="text-[6vw]">Own the</h2>
-    <h1 class="text-[7vw]">Energy Transition</h1>
+  <div
+    id="header-text"
+    class="absolute bottom-[30px] sm:bottom-[5vw] left-[6vw] text-white"
+  >
+    <h2 class="text-[10vw] sm:text-[6vw]">Own the</h2>
+    <h1 class="text-[11vw] sm:text-[7vw]">Energy Transition</h1>
   </div>
 </section>
 

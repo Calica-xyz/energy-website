@@ -4,21 +4,19 @@
   onMount(() => {
     const illoElem = document.querySelector(".zdog-canvas");
 
-    console.log(illoElem.parentNode);
-
     let parent = illoElem.parentNode.getBoundingClientRect();
 
     illoElem.setAttribute("width", parent.width);
     illoElem.setAttribute("height", parent.width);
 
-    let isSpinning = true;
     const TAU = Zdog.TAU;
+    let zoom = (parent.width - 300) * 0.001 + 0.45;
 
     let illo = new Zdog.Illustration({
       element: ".zdog-canvas",
-      dragRotate: true,
+      dragRotate: false,
       rotate: { x: TAU / -40 },
-      zoom: 0.75,
+      zoom,
     });
     let windmill = new Zdog.Group({
       addTo: illo,
@@ -175,11 +173,16 @@
   });
 </script>
 
-<section id="mission" class="flex flex-col bg-gray-800  text-white h-[100vh] ">
-  <div class="relative z-10 m-20">
-    <h2 class="text-5xl">Our Mission</h2>
-    <div class="mt-10 flex flex-wrap">
-      <p class="basis-1/2 text-xl">
+<section
+  id="mission"
+  class="flex flex-col justify-center text-white min-h-[100vh]"
+>
+  <div
+    class="p-10 py-20 sm:p-20 relative flex flex-wrap justify-center items-center gap-14 h-full"
+  >
+    <div class="flex-1 text-md sm:text-xl flex flex-col gap-14 max-w-[800px]">
+      <h2 class="text-5xl sm:text-7xl">Our Mission</h2>
+      <p>
         We're empowering the next generation of clean energy consumption. We
         avoid greenwashing at all costs and incentivize real renewable
         development.
@@ -188,16 +191,24 @@
         the clean energy market. For the first time, consumers can establish a direct
         relationship with clean energy suppliers.
       </p>
-      <div class="basis-1/2">
-        <canvas class="zdog-canvas" />
-      </div>
+    </div>
+
+    <div
+      class="flex-1 grid justify-center content-center max-w-[500px] max-h-[500px] min-w-[300px] min-h-[300px]"
+    >
+      <canvas class="zdog-canvas" />
     </div>
   </div>
 </section>
 
 <style>
-  canvas {
-    /* width: 100%;
-    aspect-ratio: 1/1; */
+  section {
+    background: linear-gradient(
+      to bottom,
+      rgb(31 41 55) 0%,
+      rgb(31 41 55) 100vh,
+      #1976b5 100vh,
+      #1976b5 100%
+    );
   }
 </style>

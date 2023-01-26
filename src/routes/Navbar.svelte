@@ -38,6 +38,7 @@
         >Calica</span
       >
     </a>
+
     <div class="hamburger">
       <div class="line" />
       <div class="line" />
@@ -56,21 +57,21 @@
         <li>
           <a
             href="#mission"
-            class="block py-2 pl-3 pr-4 text-xl text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "
+            class="hover-effect block py-2 pl-3 pr-4 text-xl text-gray-700 roundedmd:border-0 md:p-0 "
             >Mission</a
           >
         </li>
         <li>
           <a
             href="#service"
-            class="block py-2 pl-3 pr-4 text-xl text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "
+            class="hover-effect block py-2 pl-3 pr-4 text-xl text-gray-700 rounded md:border-0 md:p-0 "
             >Service</a
           >
         </li>
         <li>
           <a
             href="#signup"
-            class="block py-2 pl-3 pr-4 text-xl text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+            class="hover-effect block py-2 pl-3 pr-4 text-xl text-gray-700 rounded md:border-0 md:p-0"
             >Sign Up</a
           >
         </li>
@@ -83,6 +84,7 @@
   .nav-links {
     visibility: hidden;
   }
+
   @media screen and (max-width: 768px) {
     :global(.line) {
       width: 30px;
@@ -92,16 +94,15 @@
     }
 
     :global(.hamburger) {
-      position: absolute;
       cursor: pointer;
-      right: 5%;
-      top: 50%;
-      transform: translate(-5%, -50%);
       z-index: 2;
     }
 
     :global(.nav-links) {
       position: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: #5b78c7;
       visibility: hidden;
       bottom: 0;
@@ -109,8 +110,8 @@
       top: 0;
       left: 0;
       flex-direction: column;
-      clip-path: circle(10px at 83% 7%);
-      -webkit-clip-path: circle(10px at 83% 7%);
+      clip-path: circle(10px at 88% 8%);
+      -webkit-clip-path: circle(10px at 88% 8%);
       transition: all 1s ease-out;
       pointer-events: none;
     }
@@ -124,7 +125,7 @@
       opacity: 0;
     }
     :global(.nav-links li a) {
-      font-size: 25px;
+      font-size: 60px;
       color: white;
     }
     :global(.nav-links li:nth-child(1)) {
@@ -139,5 +140,53 @@
     :global(li.fade) {
       opacity: 1;
     }
+  }
+
+  a.hover-effect {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+  }
+
+  a.hover-effect::before,
+  a.hover-effect::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    left: 0;
+  }
+  a.hover-effect::before {
+    background-color: #54b3d6;
+    height: 2px;
+    bottom: 0;
+    transform-origin: 100% 50%;
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  a.hover-effect::after {
+    content: attr(data-replace);
+    height: 100%;
+    top: 0;
+    transform-origin: 100% 50%;
+    transform: translate3d(200%, 0, 0);
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+    color: #54b3d6;
+  }
+
+  a.hover-effect:hover::before {
+    transform-origin: 0% 50%;
+    transform: scaleX(1);
+  }
+  a.hover-effect:hover::after {
+    transform: translate3d(0, 0, 0);
+  }
+
+  a.hover-effect span {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  a.hover-effect:hover span {
+    transform: translate3d(-200%, 0, 0);
   }
 </style>
